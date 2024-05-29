@@ -4,13 +4,6 @@ body {
     padding: 50px;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-}
-
 h1 {
     text-align: center;
     margin-top: 20px;
@@ -22,9 +15,13 @@ h1 {
     right: 20px;
 }
 
+.table-container {
+    margin-bottom: 20px;
+}
+
 table {
     width: 100%;
-    margin: 20px 0;
+    margin-bottom: 20px;
     border-collapse: collapse;
 }
 
@@ -43,4 +40,39 @@ th {
 
 tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .print-container, .print-container * {
+        visibility: visible;
+    }
+    .print-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        page-break-before: always;
+    }
+    .print-container table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .print-container tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+    .print-container thead {
+        display: table-header-group;
+    }
+    .print-container tfoot {
+        display: table-footer-group;
+    }
+    .print-container th, .print-container td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+    }
 }

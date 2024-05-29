@@ -200,7 +200,7 @@ function randomString($n) {
     </div>
 <?php endif; ?>
 
-<form method="POST" class="form-inline" action="editprod.inc.php?id=<?php echo htmlspecialchars($id); ?>" enctype="multipart/form-data">
+<form method="POST" class="form-inline" action="editprod.php?id=<?php echo htmlspecialchars($id); ?>" enctype="multipart/form-data">
     <?php if ($product && $product['p_image']): ?>
         <img src="<?php echo htmlspecialchars($product['p_image']) ?>" style="max-width: 200px; max-height: 200px;">
         <button type="submit" name="remove_image" class="btn btn-danger">Remove Image</button>
