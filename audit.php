@@ -28,6 +28,11 @@ foreach ($params as $key => &$val) {
 }
 $stmt->execute();
 $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Ensure $logs is defined as an array
+if ($logs === false) {
+    $logs = [];
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,42 +44,6 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="css/audit.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <style>
-    @media print {
-        body * {
-            visibility: hidden;
-        }
-        .print-container, .print-container * {
-            visibility: visible;
-        }
-        .print-container {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-        }
-        .print-container table {
-            width: 100%;
-            border-collapse: collapse;
-            page-break-inside: auto;
-        }
-        .print-container tr {
-            page-break-inside: avoid;
-            page-break-after: auto;
-        }
-        .print-container thead {
-            display: table-header-group;
-        }
-        .print-container tfoot {
-            display: table-footer-group;
-        }
-        .print-container th, .print-container td {
-            border: 1px solid #000;
-            padding: 8px;
-            text-align: left;
-        }
-    }
-  </style>
 </head>
 <body>
     <h1>Audit Log</h1>
@@ -85,15 +54,17 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <form method="get" class="mb-3">
         <div class="row">
             <div class="col-md-3">
-                <input type="date" name="start_date" class="form-control" value="<?php echo htmlspecialchars($start_date); ?>" placeholder="Start Date">
+                <label for="start_date">Start Date</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" value="<?php echo htmlspecialchars($start_date); ?>">
             </div>
             <div class="col-md-3">
-                <input type="date" name="end_date" class="form-control" value="<?php echo htmlspecialchars($end_date); ?>" placeholder="End Date">
+                <label for="end_date">End Date</label>
+                <input type="date" name="end_date" id="end_date" class="form-control" value="<?php echo htmlspecialchars($end_date); ?>">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary">Filter</button>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 d-flex align-items-end">
                 <button type="button" class="btn btn-secondary" onclick="window.print();">Print</button>
             </div>
         </div>

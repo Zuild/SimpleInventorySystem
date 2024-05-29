@@ -16,12 +16,13 @@ h1 {
 }
 
 .table-container {
-    margin-bottom: 20px;
+    max-height: 500px; /* Adjust this to your preference */
+    overflow-y: auto;
 }
 
 table {
     width: 100%;
-    margin-bottom: 20px;
+    margin: 20px 0;
     border-collapse: collapse;
 }
 
@@ -36,6 +37,8 @@ th, td {
 
 th {
     background-color: #f2f2f2;
+    position: sticky;
+    top: 0;
 }
 
 tr:nth-child(even) {
